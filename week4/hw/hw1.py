@@ -1,15 +1,22 @@
-def time_restriction(start_hour=8, end_hour=17):
+from datetime import datetime
+
+def restrict_hours(start=9, end=17):
     def decorator(func):
         def wrapper(*args, **kwargs):
             current_hour = datetime.now().hour
-            if start_hour <= current_hour < end_hour:
+            
+            if start <= current_hour < end:
                 return func(*args, **kwargs)
             else:
-                return f"Error: Running outside allowed hours ({start_hour}:00 - {end_hour}:00)"
+                return f"Error: Function can only run between {start}:00 and {end}:00"
+        
         return wrapper
     return decorator
 
 
-@time_restriction(9, 18)  
-def my_function():
-    return "Function executed."
+@restrict_hours(start=9, end=17)
+def do_work():
+    print("Working...")
+    return "Work completed successfully"
+
+print(do_work())
