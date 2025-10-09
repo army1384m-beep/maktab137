@@ -1,0 +1,4 @@
+ahmad
+amir
+arman
+Total number of names: 3
